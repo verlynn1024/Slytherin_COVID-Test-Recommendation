@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef DATA_H
-#define DATA_H 
-
 #include <vector>
 #include <string>
 
@@ -38,5 +35,3 @@ struct HighRiskLocation {
 void addPatientData(vector<PatientDetails>&);
 void addSymptomData(vector<Symptoms>&);
 void addLocationData(vector<HighRiskLocation>&);
-
-#endif

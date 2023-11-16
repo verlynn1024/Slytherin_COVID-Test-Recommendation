@@ -6,7 +6,7 @@ void addPatientData(vector<PatientDetails>& patients) {
     PatientDetails p1 = { 1, "John Doe", 1990, "1 Main St", {"Fever", "Cough"}, "Melbourne", "Yes", "Negative", "Alive" };
     PatientDetails p2 = { 2, "Jane Doe", 1990, "2 High St", {"Fatigue", "Loss of taste or smell"}, "Sydney", "No", "Positive", "Dead" };
     PatientDetails p3 = { 3, "Harry Potter", 1978, "3 Elm St", {"Fever", "Cough"}, "Brisbane", "Yes", "Negative", "Alive" };
-    PatientDetails p4 = { 4, "Hermione Granger", 1982, "4 Oak St", {"Fatigue", "Loss of taste or smell"}, "Perth", "No", "Positive", "Dead" };
+    PatientDetails p4 = { 4, "Hermione", 1982, "4 Oak St", {"Fatigue", "Loss of taste or smell"}, "Perth", "No", "Positive", "Dead" };
     PatientDetails p5 = { 5, "Ronald Weasley", 1995, "5 Birch St", {"Shortness of breath"}, "Adelaide", "Yes", "Positive", "Alive" };
     PatientDetails p6 = { 6, "Voldemort", 1972, "6 Pine St", {"Fever", "Cough"}, "Darwin", "Yes", "Negative", "Alive" };
     PatientDetails p7 = { 7, "Percy Jackson", 1988, "7 Maple St", {"Shortness of breath"}, "Hobart", "No", "Negative", "Alive" };

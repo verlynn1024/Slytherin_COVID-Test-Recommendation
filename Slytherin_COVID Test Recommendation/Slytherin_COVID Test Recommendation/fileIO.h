@@ -16,4 +16,6 @@ bool writeDataToFile(const vector<PatientDetails>& patients,
     const string& symptomFileName,
     const string& locationFileName);
 
+void displayPatientDetails(const vector<PatientDetails>& patients);
+
 #endif

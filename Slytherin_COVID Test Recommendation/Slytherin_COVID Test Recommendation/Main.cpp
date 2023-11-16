@@ -19,6 +19,9 @@ int main() {
     // Write data to files
     writeDataToFile(patients, symptoms, locations, "Patients.txt", "Symptoms.txt", "Locations.txt");
 
+    // Display patient details
+    displayPatientDetails(patients);
+
     // Run the main menu
     runMainMenu(patients, locations, symptoms);
 

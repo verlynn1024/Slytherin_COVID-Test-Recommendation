@@ -1,6 +1,9 @@
+// fileIO.cpp
+
 #include "fileIO.h"
 #include <fstream>
 #include <iostream>
+#include <iomanip>
 
 using namespace std;
 
@@ -29,33 +32,28 @@ bool writeDataToFile(const vector<PatientDetails>& patients,
         return false;
     }
 
+    // Check if the symptom database is empty
+    if (symptoms.empty()) {
+        cout << "Unable to recommend COVID Test: required data missing." << endl;
+        return false;
+    }
+
     // Write patient data to file
     for (const PatientDetails& patient : patients) {
         patientFile << patient.patientID << "," << patient.name << "," << patient.dateOfBirth << ","
-            << patient.address;
+            << patient.address << ",";
 
-        // Check if the patient has low-risk symptoms
-        if (!patient.selectedSymptoms.lowRisk[0].empty() || !patient.selectedSymptoms.lowRisk[1].empty()) {
-            patientFile << "," << patient.selectedSymptoms.lowRisk[0] << "," << patient.selectedSymptoms.lowRisk[1];
-        }
-        else {
-            patientFile << ",,";
-        }
+        // Check if there are any symptoms before adding curly braces
+        bool hasSymptoms = !patient.selectedSymptoms.lowRisk[0].empty() ||
+            !patient.selectedSymptoms.lowRisk[1].empty() ||
+            !patient.selectedSymptoms.mediumRisk[0].empty() ||
+            !patient.selectedSymptoms.mediumRisk[1].empty() ||
+            !patient.selectedSymptoms.highRisk[0].empty();
 
-        // Check if the patient has medium-risk symptoms
-        if (!patient.selectedSymptoms.mediumRisk[0].empty() || !patient.selectedSymptoms.mediumRisk[1].empty()) {
-            patientFile << "," << patient.selectedSymptoms.mediumRisk[0] << "," << patient.selectedSymptoms.mediumRisk[1];
-        }
-        else {
-            patientFile << ",,";
-        }
-
-        // Check if the patient has high-risk symptoms
-        if (!patient.selectedSymptoms.highRisk[0].empty()) {
-            patientFile << "," << patient.selectedSymptoms.highRisk[0];
-        }
-        else {
-            patientFile << ",";
+        if (hasSymptoms) {
+            patientFile << "{" << patient.selectedSymptoms.lowRisk[0] << "," << patient.selectedSymptoms.lowRisk[1] << ","
+                << patient.selectedSymptoms.mediumRisk[0] << "," << patient.selectedSymptoms.mediumRisk[1] << ","
+                << patient.selectedSymptoms.highRisk[0] << "}";
         }
 
         patientFile << "," << patient.visitedLocation << "," << patient.overseasTravel << ","
@@ -81,11 +79,6 @@ bool writeDataToFile(const vector<PatientDetails>& patients,
     }
 
     // Write location data to file
-    for (HighRiskLocation loc : locations) {
-        locationFile << loc.locationName << "\n";
-    }
-
-    // Write location data to file
     for (const HighRiskLocation& loc : locations) {
         locationFile << loc.locationName << "\n";
     }
@@ -97,3 +90,33 @@ bool writeDataToFile(const vector<PatientDetails>& patients,
     return true;
 }
 
+void displayPatientDetails(const vector<PatientDetails>& patients) {
+    if (patients.empty()) {
+        cout << "[] - the database is empty." << endl;
+        return;
+    }
+
+    cout << "------------------------------- Patient Detail -------------------------------\n";
+    for (const PatientDetails& patient : patients) {
+        cout << patient.patientID << "," << patient.name << "," << patient.dateOfBirth << ","
+            << patient.address << ",";
+
+        // Check if there are any symptoms before adding curly braces
+        bool hasSymptoms = !patient.selectedSymptoms.lowRisk[0].empty() ||
+            !patient.selectedSymptoms.lowRisk[1].empty() ||
+            !patient.selectedSymptoms.mediumRisk[0].empty() ||
+            !patient.selectedSymptoms.mediumRisk[1].empty() ||
+            !patient.selectedSymptoms.highRisk[0].empty();
+
+        if (hasSymptoms) {
+            cout << "{" << patient.selectedSymptoms.lowRisk[0] << "," << patient.selectedSymptoms.lowRisk[1] << ","
+                << patient.selectedSymptoms.mediumRisk[0] << "," << patient.selectedSymptoms.mediumRisk[1] << ","
+                << patient.selectedSymptoms.highRisk[0] << "}";
+        }
+
+        cout << "," << patient.visitedLocation << "," << patient.overseasTravel << ","
+            << patient.covidTestStatus << "," << patient.vitalStatus << "\n";
+    }
+
+    cout << "--------------------------------------------------------------------------\n";
+}

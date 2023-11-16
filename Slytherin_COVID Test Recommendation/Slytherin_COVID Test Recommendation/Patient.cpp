@@ -41,19 +41,23 @@ string getPatientName() {
 
 // Function to get the patient's date of birth
 int getPatientDateOfBirth() {
-    int dateOfBirth;
-    while (true) {
-        cout << "Enter Date of Birth (YYYY): ";
-        if (cin >> dateOfBirth) {
-            break; // If the input is valid, exit the loop
-        }
-        else {
-            cout << "Invalid input. Please enter a numeric value for the date of birth." << endl;
-            cin.clear(); // Clear the error flag
-            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Discard invalid input
-        }
-    }
-    return dateOfBirth;
+	int dateOfBirth;
+	while (true) {
+		cout << "Enter Date of Birth (YYYY): ";
+		if (cin >> dateOfBirth) {
+            if (dateOfBirth <= 2023) {
+                break; // If the input is valid, exit the loop
+            } else {
+                cout << "Invalid input. Please enter a valid year not more than 2023." << endl;
+            }
+		}
+		else {
+			cout << "Invalid input. Please enter a numeric value for the date of birth." << endl;
+			cin.clear(); // Clear the error flag
+			cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Discard invalid input
+		}
+	}
+	return dateOfBirth;
 }
 
 // Function to get the patient's address
@@ -67,12 +71,35 @@ string getPatientAddress() {
 
 // Function to get the visited location from high-risk areas
 string getVisitedLocation(const vector<HighRiskLocation>& locations) {
+    // Display high-risk locations
     displayHighRiskLocations(locations);
-    cout << "Select visited location from High Risk COVID areas: ";
-    string visitedLocation;
-    cin.ignore();
-    getline(cin, visitedLocation);
-    return visitedLocation;
+
+    // Function to validate and get user input
+    auto getUserInput = [](int maxIndex) -> int {
+        int userInput;
+        while (true) {
+            cout << "Select visited location (or enter 0 to skip): ";
+            if (cin >> userInput && userInput >= 0 && userInput <= maxIndex) {
+                break;
+            }
+            else {
+                cout << "Invalid selection. Please choose a valid option.\n";
+                cin.clear();  // Clear the error flag
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');  // Discard invalid input
+            }
+        }
+        return userInput;
+        };
+
+    int selectedLocation = getUserInput(locations.size());
+    if (selectedLocation > 0) {
+        // User selected a high-risk location
+        return locations[selectedLocation - 1].locationName;
+    }
+    else {
+        // User skipped the selection
+        return "Not visited any high-risk location";
+    }
 }
 
 // Function to get the selected symptoms from the user
@@ -82,45 +109,33 @@ Symptoms getSelectedSymptoms(const vector<Symptoms>& symptoms) {
     // Display Low Risk Symptoms
     cout << "Low Risk Symptoms:\n";
     for (int i = 0; i < symptoms.size(); i++) {
-        cout << i + 1 << ". " << symptoms[i].lowRisk[0] << "\n";
-        cout << i + 2 << ". " << symptoms[i].lowRisk[1] << "\n";
+        cout << i * 2 + 1 << ". " << symptoms[i].lowRisk[0] << "\n";
+        cout << i * 2 + 2 << ". " << symptoms[i].lowRisk[1] << "\n";
     }
 
     int selectedLowRisk1;
     cout << "Select symptom (or enter 0 to skip): ";
     cin >> selectedLowRisk1;
 
-    if (selectedLowRisk1 > 0) {
-        // Validate user input
-        if (selectedLowRisk1 < 1 || selectedLowRisk1 > 2 * symptoms.size()) {
-            cout << "Invalid selection. Please choose a valid option.\n";
-            return getSelectedSymptoms(symptoms);  // Recursively call the function to get a valid input
-        }
-
-        selectedSymptoms.lowRisk[0] = symptoms[selectedLowRisk1 - 1].lowRisk[0];
-        selectedSymptoms.lowRisk[1] = symptoms[selectedLowRisk1 - 1].lowRisk[1];
+    if (selectedLowRisk1 > 0 && selectedLowRisk1 <= 2 * symptoms.size()) {
+        selectedSymptoms.lowRisk[0] = symptoms[(selectedLowRisk1 - 1) / 2].lowRisk[0];
+        selectedSymptoms.lowRisk[1] = symptoms[(selectedLowRisk1 - 1) / 2].lowRisk[1];
     }
 
     // Display Medium Risk Symptoms
     cout << "Medium Risk Symptoms:\n";
     for (int i = 0; i < symptoms.size(); i++) {
-        cout << i + 1 << ". " << symptoms[i].mediumRisk[0] << "\n";
-        cout << i + 2 << ". " << symptoms[i].mediumRisk[1] << "\n";
+        cout << i * 2 + 1 << ". " << symptoms[i].mediumRisk[0] << "\n";
+        cout << i * 2 + 2 << ". " << symptoms[i].mediumRisk[1] << "\n";
     }
 
     int selectedMediumRisk1;
     cout << "Select symptom (or enter 0 to skip): ";
     cin >> selectedMediumRisk1;
 
-    if (selectedMediumRisk1 > 0) {
-        // Validate user input
-        if (selectedMediumRisk1 < 1 || selectedMediumRisk1 > 2 * symptoms.size()) {
-            cout << "Invalid selection. Please choose a valid option.\n";
-            return getSelectedSymptoms(symptoms);  // Recursively call the function to get a valid input
-        }
-
-        selectedSymptoms.mediumRisk[0] = symptoms[selectedMediumRisk1 - 1].mediumRisk[0];
-        selectedSymptoms.mediumRisk[1] = symptoms[selectedMediumRisk1 - 1].mediumRisk[1];
+    if (selectedMediumRisk1 > 0 && selectedMediumRisk1 <= 2 * symptoms.size()) {
+        selectedSymptoms.mediumRisk[0] = symptoms[(selectedMediumRisk1 - 1) / 2].mediumRisk[0];
+        selectedSymptoms.mediumRisk[1] = symptoms[(selectedMediumRisk1 - 1) / 2].mediumRisk[1];
     }
 
     // Display High Risk Symptoms
@@ -133,19 +148,12 @@ Symptoms getSelectedSymptoms(const vector<Symptoms>& symptoms) {
     cout << "Select symptom (or enter 0 to skip): ";
     cin >> selectedHighRisk;
 
-    if (selectedHighRisk > 0) {
-        // Validate user input
-        if (selectedHighRisk < 1 || selectedHighRisk > symptoms.size()) {
-            cout << "Invalid selection. Please choose a valid option.\n";
-            return getSelectedSymptoms(symptoms);  // Recursively call the function to get a valid input
-        }
-
+    if (selectedHighRisk > 0 && selectedHighRisk <= symptoms.size()) {
         selectedSymptoms.highRisk[0] = symptoms[selectedHighRisk - 1].highRisk[0];
     }
 
     return selectedSymptoms;
 }
-
 
 // Function to get the overseas travel status
 string getOverseasTravelStatus() {
@@ -202,8 +210,8 @@ void addPatientAndSaveData(vector<PatientDetails>& patients, vector<HighRiskLoca
     newPatient.name = getPatientName();
     newPatient.dateOfBirth = getPatientDateOfBirth();
     newPatient.address = getPatientAddress();
-    newPatient.visitedLocation = getVisitedLocation(locations);
     newPatient.selectedSymptoms = getSelectedSymptoms(symptoms);
+    newPatient.visitedLocation = getVisitedLocation(locations);
     newPatient.overseasTravel = getOverseasTravelStatus();
     newPatient.covidTestStatus = getCOVIDTestStatus();
     newPatient.vitalStatus = getVitalStatus();
