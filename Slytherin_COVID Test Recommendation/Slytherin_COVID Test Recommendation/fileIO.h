@@ -20,4 +20,7 @@ void displayPatientDetails(const vector<PatientDetails>& patients);
 
 void displayAllLocations(const vector<HighRiskLocation>& locations);
 
+void displaySymptoms(const Symptoms& symptoms);
+
+
 #endif

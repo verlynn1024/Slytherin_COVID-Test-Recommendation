@@ -89,7 +89,8 @@ void submitCovidTestStatus(vector<PatientDetails>& patients, vector<HighRiskLoca
         // Save the updated patient details to the file with the correct symptoms vector
         writeDataToFile(patients, symptoms, locations, "Patients.txt", "Symptoms.txt", "Locations.txt");
 
-        cout << "Covid test status updated successfully.\n" << endl;
+        cout << "----------------------------------------------------\n";
+        cout << "Data saved to files.\n" << endl;
     }
     else {
         cout << "Patient not found.\n" << endl;
@@ -130,7 +131,8 @@ void updateCovidPatientDetails(vector<PatientDetails>& patients) {
 
         // Save the updated patient details to the file
         writeDataToFile(patients, vector<Symptoms>{it->selectedSymptoms}, vector<HighRiskLocation>{}, "Patients.txt", "Symptoms.txt", "Locations.txt");
-        cout << "Patient details updated successfully.\n";
+        cout << "----------------------------------------------------\n";
+        cout << "Data saved to files.\n" << endl;
     }
     else {
         cout << "Patient not found or not COVID positive in the database.\n";
@@ -152,20 +154,20 @@ void displayCovidPositivePatientDetails(const vector<PatientDetails>& patients)
             cout << "Visited Location: " << patient.visitedLocation << "\n";
 
             // Display selected symptoms
-            cout << "Symptoms:\n";
-            // Check if there are any symptoms before adding curly braces
-            bool hasSymptoms = !patient.selectedSymptoms.lowRisk[0].empty() ||
-                !patient.selectedSymptoms.lowRisk[1].empty() ||
-                !patient.selectedSymptoms.mediumRisk[0].empty() ||
-                !patient.selectedSymptoms.mediumRisk[1].empty() ||
-                !patient.selectedSymptoms.highRisk[0].empty();
+            cout << "Symptoms:" << endl;
+            cout << "Low Risk: ";
+            if (!patient.selectedSymptoms.lowRisk[0].empty()) cout << patient.selectedSymptoms.lowRisk[0] << ", ";
+            if (!patient.selectedSymptoms.lowRisk[1].empty()) cout << patient.selectedSymptoms.lowRisk[1];
+            cout << "\n";
 
-            if (hasSymptoms) {
-                cout << "Low Risk: " << patient.selectedSymptoms.lowRisk[0] << ", " << patient.selectedSymptoms.lowRisk[1] << "\n";
-                cout << "Medium Risk : " << patient.selectedSymptoms.mediumRisk[0] << ", " << patient.selectedSymptoms.mediumRisk[1] << "\n";
-                cout << "High Risk: " << patient.selectedSymptoms.highRisk[0] << "\n";
-            }
+            cout << "Medium Risk: ";
+            if (!patient.selectedSymptoms.mediumRisk[0].empty()) cout << patient.selectedSymptoms.mediumRisk[0] << ", ";
+            if (!patient.selectedSymptoms.mediumRisk[1].empty()) cout << patient.selectedSymptoms.mediumRisk[1];
+            cout << "\n";
 
+            cout << "High Risk: ";
+            if (!patient.selectedSymptoms.highRisk[0].empty()) cout << patient.selectedSymptoms.highRisk[0];
+            cout << "\n";
             cout << "Overseas Travel: " << patient.overseasTravel << "\n";
             cout << "COVID Test Status: " << patient.covidTestStatus << "\n";
             cout << "Vital Status: " << patient.vitalStatus << "\n";

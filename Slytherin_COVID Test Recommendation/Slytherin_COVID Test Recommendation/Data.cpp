@@ -4,19 +4,19 @@
 // Add sample patient data
 void addPatientData(vector<PatientDetails>& patients) {
     PatientDetails p1 = { 1, "John Doe", 1990, "1 Main St", {"Fever", "Cough"}, "Melbourne", "Yes", "Negative", "Alive" };
-    PatientDetails p2 = { 2, "Jane Doe", 1990, "2 High St", {"Fatigue", "Loss of taste or smell"}, "Sydney", "No", "Positive", "Dead" };
-    PatientDetails p3 = { 3, "Harry Potter", 1978, "3 Elm St", {"Fever", "Cough"}, "Brisbane", "Yes", "Negative", "Alive" };
-    PatientDetails p4 = { 4, "Hermione", 1982, "4 Oak St", {"Fatigue", "Loss of taste or smell"}, "Perth", "No", "Positive", "Dead" };
-    PatientDetails p5 = { 5, "Ronald Weasley", 1995, "5 Birch St", {"Shortness of breath"}, "Adelaide", "Yes", "Positive", "Alive" };
+    PatientDetails p2 = { 2, "Jane Doe", 1990, "2 High St", {"Fever", "Cough"}, "Sydney", "No", "Positive", "Dead" };
+    PatientDetails p3 = { 3, "Harry Potter", 1978, "3 Elm St", {"Fatigue", "Cough"}, "Brisbane", "Yes", "Negative", "Alive" };
+    PatientDetails p4 = { 4, "Hermione", 1982, "4 Oak St", {"Fever", "Cough"}, "Perth", "No", "Positive", "Dead" };
+    PatientDetails p5 = { 5, "Ronald Weasley", 1995, "5 Birch St", {"Fatigue", "Cough"}, "Adelaide", "Yes", "Positive", "Alive" };
     PatientDetails p6 = { 6, "Voldemort", 1972, "6 Pine St", {"Fever", "Cough"}, "Darwin", "Yes", "Negative", "Alive" };
-    PatientDetails p7 = { 7, "Percy Jackson", 1988, "7 Maple St", {"Shortness of breath"}, "Hobart", "No", "Negative", "Alive" };
-    PatientDetails p8 = { 8, "David Miller", 1980, "8 Cedar St", {"Fatigue", "Loss of taste or smell"}, "Canberra", "Yes", "Positive", "Dead" };
-    PatientDetails p9 = { 9, "Sophia Davis", 1992, "9 Poplar St", {"Fever", "Cough"}, "Adelaide", "Yes", "Negative", "Alive" };
-    PatientDetails p10 = { 10, "Oliver Wilson", 1987, "10 Redwood St", {"Shortness of breath"}, "Brisbane", "No", "Positive", "Dead" };
-    PatientDetails p11 = { 11, "Alice Johnson", 1993, "11 Douglas St", {"Shortness of breath"}, "Perth", "No", "Positive", "Alive" };
-    PatientDetails p12 = { 12, "Bob Smith", 1975, "12 Ash St", {"Fatigue", "Loss of taste or smell"}, "Hobart", "No", "Negative", "Alive" };
-    PatientDetails p13 = { 13, "Eva Williams", 1989, "13 Balsa St", {"Shortness of breath"}, "Melbourne", "Yes", "Positive", "Dead" };
-    PatientDetails p14 = { 14, "Michael Brown", 1995, "14 Walnut St", {"Fever", "Cough"}, "Sydney", "Yes", "Negative", "Alive" };
+    PatientDetails p7 = { 7, "Percy Jackson", 1988, "7 Maple St", {"Shortness of breath", "Cough"}, "Hobart", "No", "Negative", "Alive" };
+    PatientDetails p8 = { 8, "David Miller", 1980, "8 Cedar St", {"Fever", "Cough"}, "Canberra", "Yes", "Positive", "Dead" };
+    PatientDetails p9 = { 9, "Sophia Davis", 1992, "9 Poplar St", {"Shortness of breath", "Cough"}, "Adelaide", "Yes", "Negative", "Alive" };
+    PatientDetails p10 = { 10, "Oliver Wilson", 1987, "10 Redwood St", {"Fever", "Cough"}, "Brisbane", "No", "Positive", "Dead" };
+    PatientDetails p11 = { 11, "Alice Johnson", 1993, "11 Douglas St", {"Fever", "Cough"}, "Perth", "No", "Positive", "Alive" };
+    PatientDetails p12 = { 12, "Bob Smith", 1975, "12 Ash St", {"Fever", "Cough"}, "Hobart", "No", "Negative", "Alive" };
+    PatientDetails p13 = { 13, "Eva Williams", 1989, "13 Balsa St",{"Fever", "Cough"}, "Melbourne", "Yes", "Positive", "Dead" };
+    PatientDetails p14 = { 14, "Michael Brown", 1995, "14 Walnut St", {"Shortness of breath", "Cough"}, "Sydney", "Yes", "Negative", "Alive" };
     PatientDetails p15 = { 15, "Sophie Johnson", 1993, "15 Alder St", {"Fever", "Cough"}, "Canberra", "No", "Negative", "Alive" };
 
     patients.push_back(p1);

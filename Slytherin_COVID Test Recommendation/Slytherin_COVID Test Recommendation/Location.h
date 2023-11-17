@@ -12,6 +12,5 @@ using namespace std;
 
 // Function declarations
 void addLocation(vector<HighRiskLocation>& locations);
-void displayHighRiskLocations(const vector<HighRiskLocation>& locations);
 
 #endif // LOCATION_H

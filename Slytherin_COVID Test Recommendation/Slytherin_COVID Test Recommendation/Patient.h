@@ -1,6 +1,8 @@
 // patient.h
 #include "data.h" 
 #include "location.h"
+#include "symptoms.h"
+
 
 #ifndef PATIENT_H
 #define PATIENT_H

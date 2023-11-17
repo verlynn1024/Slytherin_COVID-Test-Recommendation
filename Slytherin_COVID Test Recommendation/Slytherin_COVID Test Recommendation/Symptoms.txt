@@ -1,10 +1,10 @@
 Low Risk Symptoms:
-
-
+Fever
+Cough
 
 Medium Risk Symptoms:
-
-
+Fatigue
+Loss of smell
 
 High Risk Symptoms:
-
+Shortness of breath

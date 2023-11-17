@@ -20,7 +20,7 @@ int main() {
     writeDataToFile(patients, symptoms, locations, "Patients.txt", "Symptoms.txt", "Locations.txt");
 
     // Display patient details
-    displayPatientDetails(patients);
+    //displayPatientDetails(patients);
 
     // Run the main menu
     runMainMenu(patients, locations, symptoms);

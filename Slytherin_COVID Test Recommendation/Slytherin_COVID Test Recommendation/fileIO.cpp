@@ -32,12 +32,6 @@ bool writeDataToFile(const vector<PatientDetails>& patients,
         return false;
     }
 
-    // Check if the symptom database is empty
-    /*if (symptoms.empty()) {
-        cout << "Unable to recommend COVID Test: required data missing." << endl;
-        return false;
-    }*/
-
     // Write patient data to file
     for (const PatientDetails& patient : patients) {
         patientFile << patient.patientID << "," << patient.name << "," << patient.dateOfBirth << ","
@@ -125,9 +119,26 @@ void displayAllLocations(const vector<HighRiskLocation>& locations) {
         return;
     }
 
-    cout << "------------------------- All Locations -------------------------\n";
+    cout << "-------------------------- All Locations --------------------------\n";
     for (size_t i = 0; i < locations.size(); ++i) {
         cout << setw(3) << i + 1 << ". " << locations[i].locationName << "\n";
     }
+    cout << "-------------------------------------------------------------------\n";
+}
+
+void displaySymptoms(const Symptoms& symptoms) {
+    cout << "-------------------------- All Symptoms ---------------------------\n";
+    cout << "Low Risk Symptoms:\n";
+    for (int i = 0; i < 2; ++i) {
+        cout << i + 1 << ". " << symptoms.lowRisk[i] << endl;
+    }
+
+    cout << "\nMedium Risk Symptoms:\n";
+    for (int i = 0; i < 2; ++i) {
+        cout << i + 3 << ". " << symptoms.mediumRisk[i] << endl;
+    }
+
+    cout << "\nHigh Risk Symptoms:\n";
+    cout << "5. " << symptoms.highRisk[0] << endl;
     cout << "-------------------------------------------------------------------\n";
 }

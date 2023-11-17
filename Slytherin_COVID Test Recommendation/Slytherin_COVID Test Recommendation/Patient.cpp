@@ -72,7 +72,7 @@ string getPatientAddress() {
 // Function to get the visited location from high-risk areas
 string getVisitedLocation(const vector<HighRiskLocation>& locations) {
     // Display high-risk locations
-    displayHighRiskLocations(locations);
+    displayAllLocations(locations);
 
     // Function to validate and get user input
     auto getUserInput = [](int maxIndex) -> int {
@@ -102,65 +102,35 @@ string getVisitedLocation(const vector<HighRiskLocation>& locations) {
     }
 }
 
-// Function to get the selected symptoms from the user
+// Function to get the patient's input
 Symptoms getSelectedSymptoms(const vector<Symptoms>& symptoms) {
     Symptoms selectedSymptoms;
 
-    // Display Low Risk Symptoms
-    cout << "Low Risk Symptoms:\n";
-    for (int i = 0; i < symptoms.size(); i++) {
-        cout << i * 2 + 1 << ". " << symptoms[i].lowRisk[0] << "\n";
-        cout << i * 2 + 2 << ". " << symptoms[i].lowRisk[1] << "\n";
+    // Display all symptoms before selection
+    displaySymptoms(symptoms[0]);
+
+    // Get low-risk symptoms
+    vector<string> lowRiskSymptoms = getSelectedSymptomsByRiskLevel(symptoms[0], 0);
+    if (lowRiskSymptoms.size() >= 2) {
+        selectedSymptoms.lowRisk[0] = lowRiskSymptoms[0];
+        selectedSymptoms.lowRisk[1] = lowRiskSymptoms[1];
     }
 
-    int selectedLowRisk1;
-    cout << "Select symptom (or enter 0 to skip): ";
-    cin >> selectedLowRisk1;
-
-    if (selectedLowRisk1 > 0 && selectedLowRisk1 <= 2 * symptoms.size()) {
-        selectedSymptoms.lowRisk[0] = symptoms[(selectedLowRisk1 - 1) / 2].lowRisk[0];
-        selectedSymptoms.lowRisk[1] = symptoms[(selectedLowRisk1 - 1) / 2].lowRisk[1];
-    } else {
-        // User skipped the selection, return a null-like value
-        return Symptoms{}; // Default constructor initializes all strings to empty
+    // Get medium-risk symptoms
+    vector<string> mediumRiskSymptoms = getSelectedSymptomsByRiskLevel(symptoms[0], 1);
+    if (mediumRiskSymptoms.size() >= 2) {
+        selectedSymptoms.mediumRisk[0] = mediumRiskSymptoms[0];
+        selectedSymptoms.mediumRisk[1] = mediumRiskSymptoms[1];
     }
 
-    // Display Medium Risk Symptoms
-    cout << "Medium Risk Symptoms:\n";
-    for (int i = 0; i < symptoms.size(); i++) {
-        cout << i * 2 + 1 << ". " << symptoms[i].mediumRisk[0] << "\n";
-        cout << i * 2 + 2 << ". " << symptoms[i].mediumRisk[1] << "\n";
+    // Get high-risk symptoms
+    vector<string> highRiskSymptoms = getSelectedSymptomsByRiskLevel(symptoms[0], 2);
+    if (!highRiskSymptoms.empty()) {
+        selectedSymptoms.highRisk[0] = highRiskSymptoms[0];
     }
-
-    int selectedMediumRisk1;
-    cout << "Select symptom (or enter 0 to skip): ";
-    cin >> selectedMediumRisk1;
-
-    if (selectedMediumRisk1 > 0 && selectedMediumRisk1 <= 2 * symptoms.size()) {
-        selectedSymptoms.mediumRisk[0] = symptoms[(selectedMediumRisk1 - 1) / 2].mediumRisk[0];
-        selectedSymptoms.mediumRisk[1] = symptoms[(selectedMediumRisk1 - 1) / 2].mediumRisk[1];
-    }else {
-        // User skipped the selection, return a null-like value
-        return Symptoms{}; // Default constructor initializes all strings to empty
-    }
-
-    // Display High Risk Symptoms
-    cout << "High Risk Symptoms:\n";
-    for (int i = 0; i < symptoms.size(); i++) {
-        cout << i + 1 << ". " << symptoms[i].highRisk[0] << "\n";
-    }
-
-    int selectedHighRisk;
-    cout << "Select symptom (or enter 0 to skip): ";
-    cin >> selectedHighRisk;
-
-    if (selectedHighRisk > 0 && selectedHighRisk <= symptoms.size()) {
-        selectedSymptoms.highRisk[0] = symptoms[selectedHighRisk - 1].highRisk[0];
-    }
-    else {
-        // User skipped the selection, return a null-like value
-        return Symptoms{}; // Default constructor initializes all strings to empty
-    }
+   
+    // Display all selected symptoms
+    displaySelectedSymptoms(lowRiskSymptoms, mediumRiskSymptoms, highRiskSymptoms);
 
     return selectedSymptoms;
 }
