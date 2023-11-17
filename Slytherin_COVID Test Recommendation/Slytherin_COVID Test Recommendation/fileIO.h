@@ -18,4 +18,6 @@ bool writeDataToFile(const vector<PatientDetails>& patients,
 
 void displayPatientDetails(const vector<PatientDetails>& patients);
 
+void displayAllLocations(const vector<HighRiskLocation>& locations);
+
 #endif

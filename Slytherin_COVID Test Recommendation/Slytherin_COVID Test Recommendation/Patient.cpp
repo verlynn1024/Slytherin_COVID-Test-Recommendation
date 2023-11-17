@@ -120,6 +120,9 @@ Symptoms getSelectedSymptoms(const vector<Symptoms>& symptoms) {
     if (selectedLowRisk1 > 0 && selectedLowRisk1 <= 2 * symptoms.size()) {
         selectedSymptoms.lowRisk[0] = symptoms[(selectedLowRisk1 - 1) / 2].lowRisk[0];
         selectedSymptoms.lowRisk[1] = symptoms[(selectedLowRisk1 - 1) / 2].lowRisk[1];
+    } else {
+        // User skipped the selection, return a null-like value
+        return Symptoms{}; // Default constructor initializes all strings to empty
     }
 
     // Display Medium Risk Symptoms
@@ -136,6 +139,9 @@ Symptoms getSelectedSymptoms(const vector<Symptoms>& symptoms) {
     if (selectedMediumRisk1 > 0 && selectedMediumRisk1 <= 2 * symptoms.size()) {
         selectedSymptoms.mediumRisk[0] = symptoms[(selectedMediumRisk1 - 1) / 2].mediumRisk[0];
         selectedSymptoms.mediumRisk[1] = symptoms[(selectedMediumRisk1 - 1) / 2].mediumRisk[1];
+    }else {
+        // User skipped the selection, return a null-like value
+        return Symptoms{}; // Default constructor initializes all strings to empty
     }
 
     // Display High Risk Symptoms
@@ -150,6 +156,10 @@ Symptoms getSelectedSymptoms(const vector<Symptoms>& symptoms) {
 
     if (selectedHighRisk > 0 && selectedHighRisk <= symptoms.size()) {
         selectedSymptoms.highRisk[0] = symptoms[selectedHighRisk - 1].highRisk[0];
+    }
+    else {
+        // User skipped the selection, return a null-like value
+        return Symptoms{}; // Default constructor initializes all strings to empty
     }
 
     return selectedSymptoms;

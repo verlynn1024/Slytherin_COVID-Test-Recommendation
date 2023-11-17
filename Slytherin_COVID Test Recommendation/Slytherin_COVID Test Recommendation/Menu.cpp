@@ -48,8 +48,7 @@ void enterPatientDetails(vector<PatientDetails>& patients, vector<HighRiskLocati
     cout << "Data saved to files.\n" << endl;
 }
 
-//Lamda Expression
-void submitCovidTestStatus(vector<PatientDetails>& patients, vector<HighRiskLocation>& locations) 
+void submitCovidTestStatus(vector<PatientDetails>& patients, vector<HighRiskLocation>& locations)
 {
     int patientID;
     string testStatus;
@@ -87,15 +86,19 @@ void submitCovidTestStatus(vector<PatientDetails>& patients, vector<HighRiskLoca
             }
         }
 
-        cout << "Covid test status updated successfully." << endl;
+        // Save the updated patient details to the file with the correct symptoms vector
+        writeDataToFile(patients, symptoms, locations, "Patients.txt", "Symptoms.txt", "Locations.txt");
+
+        cout << "Covid test status updated successfully.\n" << endl;
     }
     else {
-        cout << "Patient not found." << endl;
+        cout << "Patient not found.\n" << endl;
     }
 }
 
+
 void displayUpdatedLocations(vector<HighRiskLocation>& locations) {
-    displayHighRiskLocations(locations);
+    displayAllLocations(locations);
 }
 
 void updateCovidPatientDetails(vector<PatientDetails>& patients) {
@@ -136,7 +139,7 @@ void updateCovidPatientDetails(vector<PatientDetails>& patients) {
 
 void displayCovidPositivePatientDetails(const vector<PatientDetails>& patients)
 {
-
+    cout << "-----------------------------------------------------" << endl;
     cout << "COVID Positive Patients Details:\n";
 
     for (const PatientDetails& patient : patients) {
@@ -150,9 +153,18 @@ void displayCovidPositivePatientDetails(const vector<PatientDetails>& patients)
 
             // Display selected symptoms
             cout << "Symptoms:\n";
-            cout << "Low Risk: " << patient.selectedSymptoms.lowRisk[0] << ", " << patient.selectedSymptoms.lowRisk[1] << "\n";
-            cout << "Medium Risk : " << patient.selectedSymptoms.mediumRisk[0] << ", " << patient.selectedSymptoms.mediumRisk[1] << "\n";
-            cout << "High Risk: " << patient.selectedSymptoms.highRisk[0] << "\n";
+            // Check if there are any symptoms before adding curly braces
+            bool hasSymptoms = !patient.selectedSymptoms.lowRisk[0].empty() ||
+                !patient.selectedSymptoms.lowRisk[1].empty() ||
+                !patient.selectedSymptoms.mediumRisk[0].empty() ||
+                !patient.selectedSymptoms.mediumRisk[1].empty() ||
+                !patient.selectedSymptoms.highRisk[0].empty();
+
+            if (hasSymptoms) {
+                cout << "Low Risk: " << patient.selectedSymptoms.lowRisk[0] << ", " << patient.selectedSymptoms.lowRisk[1] << "\n";
+                cout << "Medium Risk : " << patient.selectedSymptoms.mediumRisk[0] << ", " << patient.selectedSymptoms.mediumRisk[1] << "\n";
+                cout << "High Risk: " << patient.selectedSymptoms.highRisk[0] << "\n";
+            }
 
             cout << "Overseas Travel: " << patient.overseasTravel << "\n";
             cout << "COVID Test Status: " << patient.covidTestStatus << "\n";
@@ -187,9 +199,6 @@ void runMainMenu(vector<PatientDetails>& patients, vector<HighRiskLocation>& loc
             break;
         case 3:
             displayUpdatedLocations(locations);
-            //changes made here
-            addLocation(locations);
-            writeDataToFile(patients, symptoms, locations, "Patients.txt", "Symptoms.txt", "Locations.txt");
             break;
         case 4:
             updateCovidPatientDetails(patients);
@@ -198,6 +207,7 @@ void runMainMenu(vector<PatientDetails>& patients, vector<HighRiskLocation>& loc
             displayCovidPositivePatientDetails(patients);
             break;
         case 6:
+            cout <<"Goodbye.\n" << endl;
             break;
         default:
             cout << "Invalid choice. Please select a valid option.\n" << endl;

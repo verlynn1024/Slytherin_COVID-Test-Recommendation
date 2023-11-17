@@ -1,0 +1,16 @@
+1,John Doe,1990,1 Main St,{Fever,Cough,,,},Melbourne,Yes,Negative,Alive
+2,Jane Doe,1990,2 High St,{Fatigue,Loss of taste or smell,,,},Sydney,No,Positive,Dead
+3,Harry Potter,1978,3 Elm St,{Fever,Cough,,,},Brisbane,Yes,Negative,Alive
+4,Hermione,1982,4 Oak St,{Fatigue,Loss of taste or smell,,,},Perth,No,Positive,Dead
+5,Ronald Weasley,1995,5 Birch St,{Shortness of breath,,,,},Adelaide,Yes,Positive,Alive
+6,Voldemort,1972,6 Pine St,{Fever,Cough,,,},Darwin,Yes,Negative,Alive
+7,Percy Jackson,1988,7 Maple St,{Shortness of breath,,,,},Hobart,No,Negative,Alive
+8,David Miller,1980,8 Cedar St,{Fatigue,Loss of taste or smell,,,},Canberra,Yes,Positive,Dead
+9,Sophia Davis,1992,9 Poplar St,{Fever,Cough,,,},Adelaide,Yes,Negative,Alive
+10,Oliver Wilson,1987,10 Redwood St,{Shortness of breath,,,,},Brisbane,No,Positive,Dead
+11,Alice Johnson,1993,11 Douglas St,{Shortness of breath,,,,},Perth,No,Positive,Alive
+12,Bob Smith,1975,12 Ash St,{Fatigue,Loss of taste or smell,,,},Hobart,No,Negative,Alive
+13,Eva Williams,1989,13 Balsa St,{Shortness of breath,,,,},Melbourne,Yes,Positive,Dead
+14,Michael Brown,1995,14 Walnut St,{Fever,Cough,,,},Sydney,Yes,Negative,Alive
+15,Sophie Johnson,1993,15 Alder St,{Fever,Cough,,,},Canberra,No,Negative,Alive
+16,Sam,1988,12 jdiej,,Not visited any high-risk location,Yes,Positive,Alive
